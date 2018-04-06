@@ -40,6 +40,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     dismiss(animated: true, completion: nil)
   }
   
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    // Making sure we only use the original representation of the image from the dictionary.
+    guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+      else {
+        fatalError("Expected a dictionary containing the original image, but was given \(info) instead.")
+    }
+    
+    
+    // Sets photoImageView to only display the selected image.
+    photoImageView.image = selectedImage
+    
+    // Dismisses the picker.
+    dismiss(animated: true, completion: nil)
+  }
+  
   //MARK: Actions
   @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
     // Hides the keyboard if open.
