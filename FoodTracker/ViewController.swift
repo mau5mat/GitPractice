@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   //MARK: Properties
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var mealNameLabel: UILabel!
+  @IBOutlet weak var photoImageView: UIImageView!
   
   
     override func viewDidLoad() {
@@ -24,7 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
   
   //MARK: UITextFieldDelegate
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    // Hide the keyboard
+    // Hide the keyboard.
     textField.resignFirstResponder()
     return true
   }
@@ -33,7 +34,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
     mealNameLabel.text = textField.text
   }
   
+  //MARK: UIImagePickerControlDelegate
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    // Dismisses the picker if the user cancels it.
+    dismiss(animated: true, completion: nil)
+  }
+  
   //MARK: Actions
+  @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
+    // Hides the keyboard if open.
+    nameTextField.resignFirstResponder()
+    
+    // imagePickerController is a View Controller that lets users pick images from their photo library.
+    let imagePickerController = UIImagePickerController()
+    
+    // The code below ensures that users can only pick photos, not take them.
+    imagePickerController.sourceType = .photoLibrary
+    
+    // This makes sure that the ViewController is notified when a user selects an image.
+    imagePickerController.delegate = self
+    
+    // Method call on ViewController.  Basically asking ViewController to present the view controller defined
+    // by the imagePickerController.  Passing true to the animated parameter will animate the presentation
+    // of the image picker controller.  Passing Nil to the completion parameter ensures that no code needs
+    // to be executed after the method call is over.
+    present(imagePickerController, animated: true, completion: nil)
+  }
+  
   @IBAction func setDefaultLabelText(_ sender: UIButton) {
     mealNameLabel.text = "Default Text"
   }
