@@ -15,7 +15,14 @@ import UIKit
   
   // Creating an array of buttons, starting at 0 to be incremented to 5 in setupButtons().
   private var ratingButtons = [UIButton]()
-  var rating = 0
+  
+  // Added property observer to rating variable that tells the updateButtonSelectionStates() method that the rating variable has changed
+  // from default to something else (should be 1-5).
+  var rating = 0 {
+    didSet {
+      updateButtonSelectionStates()
+    }
+  }
   
   // Inspectable variables that hold the size and number of the Star pictures that will
   // be shown.
@@ -43,7 +50,7 @@ import UIKit
   }
   
   // MARK: Button Action
-  @objc func ratingButtonTapped(button: UIButton) { // CHANGE THIS HERE
+  @objc func ratingButtonTapped(button: UIButton) {
     guard let index = ratingButtons.index(of: button) else {
       fatalError("The button, \(button), is not in the ratingButtons array: \(ratingButtons)")
     }
@@ -79,7 +86,7 @@ import UIKit
     let highlightedStar = UIImage(named: "highlightedStar", in: bundle, compatibleWith: self.traitCollection)
     
     // Setting up 5 of the same type of button using a For-In loop buttons when initialized.
-    for _ in 0..<starCount {
+    for index in 0..<starCount {
       
       let button = UIButton()
       
@@ -95,6 +102,10 @@ import UIKit
       button.heightAnchor.constraint(equalToConstant: starSize.width).isActive = true
       button.widthAnchor.constraint(equalToConstant: starSize.height).isActive = true
       
+      // Setting the accessability label.  This bit of code calculates a label string using the buttons index then assigns it to
+      // the buttons accessibilityLabel property.
+      button.accessibilityLabel = "Set \(index + 1) star rating"
+      
       // Set an action for the button to execute when pressed (LEARN MORE ABOUT addTarget()).
       button.addTarget(self, action:
         #selector(RatingControl.ratingButtonTapped(button:)), for: .touchUpInside)
@@ -104,6 +115,43 @@ import UIKit
       
       // Adds button to the ratingButtons array.
       ratingButtons.append(button)
+    }
+    
+    // This call updates the buttons selection state whenever buttons are added to the control.
+    updateButtonSelectionStates()
+  }
+  
+  private func updateButtonSelectionStates() {
+    for (index, button) in ratingButtons.enumerated() {
+      
+      // If the index of a button is less than the rating, that button should be selected.
+      button.isSelected = index < rating
+      
+      // Set the hint string for the currently selected star.
+      let hintString: String?
+      
+      if rating == index + 1 {
+        hintString = "Tap to reset the rating to zero."
+      } else {
+        hintString = nil
+      }
+      
+      // Calculates the value string
+      let valueString: String
+      
+      switch (rating) {
+      
+      case 0:
+        valueString = "No rating set."
+      case 1:
+        valueString = "1 star set."
+      default:
+        valueString = "\(rating) stars set."
+      }
+      
+      // Assigning the hint and value strings
+      button.accessibilityHint = hintString
+      button.accessibilityValue = valueString
     }
   }
   
