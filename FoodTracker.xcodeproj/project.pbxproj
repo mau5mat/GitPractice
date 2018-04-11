@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9F050CEE207B69CD0099A266 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F050CED207B69CD0099A266 /* RatingControl.swift */; };
 		9F050CF0207D021F0099A266 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F050CEF207D021E0099A266 /* Meal.swift */; };
+		9F050CF2207E05600099A266 /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F050CF1207E05600099A266 /* MealTableViewCell.swift */; };
+		9F050CF4207E26140099A266 /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F050CF3207E26140099A266 /* MealTableViewController.swift */; };
 		9FD380DA2073C32C00D69A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD380D92073C32C00D69A26 /* AppDelegate.swift */; };
 		9FD380DC2073C32C00D69A26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD380DB2073C32C00D69A26 /* ViewController.swift */; };
 		9FD380DF2073C32C00D69A26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FD380DD2073C32C00D69A26 /* Main.storyboard */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		9F050CED207B69CD0099A266 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		9F050CEF207D021E0099A266 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		9F050CF1207E05600099A266 /* MealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
+		9F050CF3207E26140099A266 /* MealTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
 		9FD380D62073C32C00D69A26 /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FD380D92073C32C00D69A26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9FD380DB2073C32C00D69A26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 				9FD380DB2073C32C00D69A26 /* ViewController.swift */,
 				9F050CED207B69CD0099A266 /* RatingControl.swift */,
 				9F050CEF207D021E0099A266 /* Meal.swift */,
+				9F050CF1207E05600099A266 /* MealTableViewCell.swift */,
+				9F050CF3207E26140099A266 /* MealTableViewController.swift */,
 				9FD380DD2073C32C00D69A26 /* Main.storyboard */,
 				9FD380E02073C32E00D69A26 /* Assets.xcassets */,
 				9FD380E22073C32E00D69A26 /* LaunchScreen.storyboard */,
@@ -207,6 +213,8 @@
 				9FD380DC2073C32C00D69A26 /* ViewController.swift in Sources */,
 				9F050CEE207B69CD0099A266 /* RatingControl.swift in Sources */,
 				9FD380DA2073C32C00D69A26 /* AppDelegate.swift in Sources */,
+				9F050CF4207E26140099A266 /* MealTableViewController.swift in Sources */,
+				9F050CF2207E05600099A266 /* MealTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
