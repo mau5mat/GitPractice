@@ -109,8 +109,8 @@ class MealTableViewController: UITableViewController {
   
   @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
     
-    if let sourceviewViewController = sender.souceViewController as?
-      MealViewController, meal = sourceviewViewController.meal {
+    if let sourceviewViewController = sender.source as?
+      MealViewController, let meal = sourceviewViewController.meal {
       
       // Add a new meal.
       let newIndexPath = IndexPath(row: meals.count, section: 0)
