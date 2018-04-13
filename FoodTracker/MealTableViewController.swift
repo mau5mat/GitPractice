@@ -11,14 +11,15 @@ import UIKit
 class MealTableViewController: UITableViewController {
   
   // MARK: Properties
-  
   var meals = [Meal]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    // This loads the sample data as defined in the loadSampleMeals() method
-    loadSampleMeals()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    loadSampleMeals() // TESTING
   }
   
   override func didReceiveMemoryWarning() {
@@ -27,7 +28,6 @@ class MealTableViewController: UITableViewController {
   }
   
   // MARK: - Table view data source
-  
   override func numberOfSections(in tableView: UITableView) -> Int {
     
     return 1
@@ -106,7 +106,6 @@ class MealTableViewController: UITableViewController {
    */
   
   // MARK: Actions
-  
   @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
     
     if let sourceviewViewController = sender.source as?
@@ -121,7 +120,6 @@ class MealTableViewController: UITableViewController {
   }
   
   // MARK: Private Methods
-  
   private func loadSampleMeals() {
     
     let samplePhoto1 = UIImage(named: "bibimbap")

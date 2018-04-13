@@ -12,7 +12,6 @@ import UIKit
   
   
   // MARK: Properties
-  
   // Creating an array of buttons, starting at 0 to be incremented to 5 in setupButtons().
   private var ratingButtons = [UIButton]()
   
