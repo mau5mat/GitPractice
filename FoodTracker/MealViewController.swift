@@ -28,7 +28,10 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
+    // Handle the text field's user input through delegate callbacks.
+    nameTextField.delegate = self
+    
     // Set up views if editing an existing Meal.
     if let meal = meal {
       
@@ -36,7 +39,6 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
       nameTextField.text = meal.name
       photoImageView.image = meal.photo
       ratingControl.rating = meal.rating
-      
     }
     
     // Emnable the Save button only if the text field has a valid Meal name.
