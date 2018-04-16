@@ -20,7 +20,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
   /*
    
    This value is either passed by 'MealTableViewController' in 'prepare(for:sender:)',
-   or constructed as part of t adding a new meal
+   or constructed as part of adding a new meal.
    
    */
   var meal: Meal?
@@ -32,6 +32,17 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     // Handle the text field’s user input through delegate callbacks.
     nameTextField.delegate = self
     
+    // Set up views if editing an existing Meal.
+    if let meal = meal {
+      
+      navigationItem.title = meal.name
+      nameTextField.text = meal.name
+      photoImageView.image = meal.photo
+      ratingControl.rating = meal.rating
+      
+    }
+    
+    // Emnable the Save button only if the text field has a valid Meal name.
     updateSaveButtonState()
   }
   
