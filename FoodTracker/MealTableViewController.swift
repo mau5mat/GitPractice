@@ -16,11 +16,12 @@ class MealTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    loadSampleMeals()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    loadSampleMeals() // TESTING
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -129,6 +130,7 @@ class MealTableViewController: UITableViewController {
       
     default:
       fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+      
     }
     
   }
@@ -140,37 +142,43 @@ class MealTableViewController: UITableViewController {
     if let sourceviewViewController = sender.source as?
       MealViewController, let meal = sourceviewViewController.meal {
       
-      // Add a new meal.
-      let newIndexPath = IndexPath(row: meals.count, section: 0)
-      
-      meals.append(meal)
-      tableView.insertRows(at: [newIndexPath], with: .automatic)
+      if let selectedIndexPAth = tableView.indexPathForSelectedRow {
+        // Update and existing meal.
+        meals[selectedIndexPAth.row] = meal
+        tableView.reloadRows(at: [selectedIndexPAth], with: .none)
+      }
+      else {
+        
+        // Add a new meal.
+        let newIndexPath = IndexPath(row: meals.count, section: 0)
+        
+        meals.append(meal)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+      }
     }
   }
   
-  // MARK: Private Methods
+  // MARK: Private Functions
   private func loadSampleMeals() {
     
-    let samplePhoto1 = UIImage(named: "bibimbap")
-    let samplePhoto2 = UIImage(named: "bananaPizza")
-    let samplePhoto3 = UIImage(named: "bakedPotato")
+    let photo1 = UIImage(named: "bibimbap")
+    let photo2 = UIImage(named: "bakedPotato")
+    let photo3 = UIImage(named: "bananaPizza")
     
-    guard let meal1 = Meal(name: "Bibimbap", photo: samplePhoto1, rating: 5) else {
+    guard let meal1 = Meal(name: "Bibimbap", photo: photo1, rating: 4) else {
       fatalError("Unable to instantiate meal1")
     }
     
-    guard let meal2 = Meal(name: "Banana Pizza", photo: samplePhoto2, rating: 1) else {
+    guard let meal2 = Meal(name: "Traditional Irish Meal", photo: photo2, rating: 5) else {
       fatalError("Unable to instantiate meal2")
     }
     
-    guard let meal3 = Meal(name: "Traditional Homecooked Irish Food", photo: samplePhoto3, rating: 4) else {
-      fatalError("Unable to instantiate meal3")
+    guard let meal3 = Meal(name: "Unholy Abomination", photo: photo3, rating: 3) else {
+      fatalError("Unable to instantiate meal2")
     }
     
     meals += [meal1, meal2, meal3]
-    
   }
 }
-
 
 
