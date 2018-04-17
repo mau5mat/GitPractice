@@ -20,9 +20,16 @@ class MealTableViewController: UITableViewController {
     
     // Use the edit button utem provided by the table view controller.
     navigationItem.leftBarButtonItem = editButtonItem
-  
     
-    loadSampleMeals()
+    //Loads any saved meals, otherwise loads sample data.
+    if let savedMeals = loadMeals() {
+      meals += savedMeals
+    }
+    else {
+      
+      //Loads the sample data.
+      loadSampleMeals()
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -79,12 +86,19 @@ class MealTableViewController: UITableViewController {
   
   // Override to support editing the table view.
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    
     if editingStyle == .delete {
+      
       // Delete the row from the data source
       meals.remove(at: indexPath.row)
+      
+      // Saves the meals.
+      saveMeals()
+      
       tableView.deleteRows(at: [indexPath], with: .fade)
+      
     } else if editingStyle == .insert {
-      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
   }
   
@@ -153,8 +167,7 @@ class MealTableViewController: UITableViewController {
         // Update and existing meal.
         meals[selectedIndexPAth.row] = meal
         tableView.reloadRows(at: [selectedIndexPAth], with: .none)
-      }
-      else {
+      } else {
         
         // Add a new meal.
         let newIndexPath = IndexPath(row: meals.count, section: 0)
@@ -162,6 +175,9 @@ class MealTableViewController: UITableViewController {
         meals.append(meal)
         tableView.insertRows(at: [newIndexPath], with: .automatic)
       }
+      
+      // Saves the meals.
+      saveMeals()
     }
   }
   
@@ -186,6 +202,21 @@ class MealTableViewController: UITableViewController {
     
     meals += [meal1, meal2, meal3]
   }
+  
+  private func saveMeals() {
+    let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
+    
+    if isSuccessfulSave {
+      os_log("Meals were saved successfully saved.", log: OSLog.default, type: .debug)
+    } else {
+      os_log("Failed to save data.", log: OSLog.default, type: .debug)
+    }
+  }
+  
+  private func loadMeals() -> [Meal]? {
+    return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
+  }
+  
 }
 
 
